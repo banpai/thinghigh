@@ -56,10 +56,31 @@ var right = new Vue({
   }
 });
 
+
+
 //渲染中部
 var app = new Vue({
   el: '#app',
   data: {
-    message: '测试标题!'
+    tasksearch: '',
+    taskli:[
+      {
+        date: '2016-12-14',
+        lidata: [
+        ]
+      }
+    ]
   }
 });
+
+document.onkeydown = function (event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+  if (e && e.keyCode == 13) { // enter 键
+    console.log(app.tasksearch);
+    var sel = {
+      name: app.tasksearch
+    };
+    app.taskli[0].lidata.push(sel);
+    app.tasksearch = '';
+  }
+};

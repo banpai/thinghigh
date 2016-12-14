@@ -41,14 +41,14 @@
 
 	<!--中部分主体 start-->
 	<div id="app">
-    	<h1 v-text="message" class="title"></h1>
-		<!--导航 start-->
-		<div class="nav">
-			<div class="name">
-        
-			</div>
-		</div>
-		<!--导航 end-->
+		<!--任务 start-->
+    <div id="task">
+      <input v-model="tasksearch" placeholder="增加任务，按回车键添加" class="addtask">
+      <div class="task_name" v-for="item in taskli">
+        <div class="task_name_li" v-for="index in item.lidata" v-text="index.name"></div>
+      </div>
+    </div>
+		<!--任务 end-->
 	</div>
 	<!--中部分主体 end-->
 
