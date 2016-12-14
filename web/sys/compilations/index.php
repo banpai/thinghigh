@@ -23,14 +23,19 @@
 	<!--云 end-->
 
 	<!--left start-->
-  <div id="left">
-      打算
+  <div id="left" class="bian">
+    <div class="li" v-for="item in level">
+      <p class="word" v-text="item.li"></p>
+    </div>
+    <div id="process"></div>
   </div>
 	<!--left end-->
 
 	<!--right start-->
-	<div id="right">
-    
+	<div id="right" class="bian">
+    <div class="li" v-for="item in buttons">
+      <p class="word" v-text="item.name"></p>
+    </div>
 	</div>
 	<!--right end-->
 
@@ -40,7 +45,7 @@
 		<!--导航 start-->
 		<div class="nav">
 			<div class="name">
-
+        
 			</div>
 		</div>
 		<!--导航 end-->
