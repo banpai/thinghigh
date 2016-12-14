@@ -12,16 +12,48 @@ body {
     box-shadow: inset 2.5rem 1.3rem 28rem 2.5rem #307BC7;
 }
 
+/*左边的部分 start*/
+#left{
+  float: left;
+  width: 80px;
+  height: 100%;
+  background: #fff;
+  margin-top: -2px;
+  box-shadow: 0 .3rem 1rem .3rem #307BC7;
+}
+/*左边的部分 end*/
+
+/*右边的部分 start*/
+#right{
+  float: right;
+  width: 80px;
+  height: 100%;
+  background: #fff;
+  margin-top: -2px;
+  box-shadow: 0 .3rem 1rem .3rem #307BC7;
+}
+/*右边的部分 end*/
+
+@media screen and (max-width: 990px) { 
+  #left{
+    display: none;
+  }
+  #right{
+    display: none;
+  }
+} 
+
+/*主体部分 start*/
 #app {
-    max-width: 980px;
+    max-width: 800px;
     min-width: 300px;
-    border: 1px solid #307BC7;
     box-shadow: 0 .3rem 1rem .3rem #307BC7;
     margin: 30px auto;
     background: #fff;
     border-radius: .5rem;
     height: 90%;
 }
+/*主体部分 end*/
 
 .title {
     text-align: center;

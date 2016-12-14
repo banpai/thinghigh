@@ -21,18 +21,32 @@
 		<div class="clound s6"></div>
 	</div>
 	<!--云 end-->
-	<!--整体 start-->
+
+	<!--left start-->
+  <div id="left">
+      打算
+  </div>
+	<!--left end-->
+
+	<!--right start-->
+	<div id="right">
+    
+	</div>
+	<!--right end-->
+
+	<!--中部分主体 start-->
 	<div id="app">
     	<h1 v-text="message" class="title"></h1>
 		<!--导航 start-->
 		<div class="nav">
 			<div class="name">
-				
+
 			</div>
 		</div>
 		<!--导航 end-->
 	</div>
-	<!--整体 end-->
+	<!--中部分主体 end-->
+
 	<script src="/js/index.min.js" charset="utf-8"></script>
 </body>
 </html>
