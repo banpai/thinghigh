@@ -32,7 +32,9 @@
 	<div id="app">
 		<!--任务 start-->
     <div id="task">
-      <input v-model="tasksearch" placeholder="增加任务，按回车键添加" class="addtask">
+      <div class="task_header">
+        <input v-model="tasksearch" placeholder="增加任务，按回车键添加" class="addtask">
+      </div>
       <div class="task_name" v-for="item in taskli">
         <div class="task_name_li" v-for="index in item.lidata" v-text="index.name"></div>
       </div>
