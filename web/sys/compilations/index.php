@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="/@system/js/vue.js"></script>
 </head>
 <body>
-	<link rel="stylesheet" href="/css/index.min.css">
+	<link rel="stylesheet" href="/css/index.css">
 	<!--云 start-->
 	<div id="sky">
 		<div class="clound s1"></div>
@@ -41,16 +41,34 @@
 
 	<!--中部分主体 start-->
 	<div id="app">
+
 		<!--任务 start-->
     <div id="task">
+      <!--搜索 start-->
       <div class="task_header">
         <input v-model="tasksearch" placeholder="增加任务，按回车键添加" class="addtask">
       </div>
-      <div class="task_name" v-for="item in taskli">
-        <div class="task_name_li" v-for="index in item.lidata" v-text="index.name"></div>
+      <!--搜索 end-->
+      <div class="task_box" v-for="item in taskli">
+        <!--未完成 start-->
+        <div class="task_ready">
+          <div class="task_ready_li" v-for="index in item.lidata">
+            <div class="task_ready_li_complete">OK</div>
+            <div class="task_ready_li_year">2016-12-17</div>
+            <input class="task_ready_li_name" v-model="index.name">
+            <!--<div class="task_ready_li_name" contenteditable="true" v-text="index.name"></div>-->
+          </div>
+        </div>
+        <!--未完成 end-->
+        <!--已结束 start-->
+        <div class="task_end">
+          <div class="task_end_li" v-for="index in item.lidata" v-text="index.name"></div>
+        </div>
+        <!--已结束 end-->
       </div>
     </div>
 		<!--任务 end-->
+
 	</div>
 	<!--中部分主体 end-->
 
