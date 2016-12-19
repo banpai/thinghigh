@@ -49,23 +49,15 @@ var thinghigh = (function () {
     db: null,
     callback: function () {
       getbuttonsdata();
-      getleveldata();
-      // deletestroe(thinghigh.myDB.db);
-      // clearObjectStore(myDB.db, 'students');
-      // addData(myDB.db, 'students');
-      // getDataByKey(myDB.db, 'students', 1)
+      getleveldata(); 
     }
   };
   //获取按钮模块数据
   var getbuttonsdata = function () {
-    if(myDB.db.objectStoreNames.contains('buttons')){
-      
-    }else{
-      ajax('/js/data/buttons.json', {}, function (data) {
-        right.buttons = data.data;
-        bpdb.addData('buttons', data.data);
-      });
-    }
+     ajax('/js/data/buttons.json', {}, function (data) {
+      right.buttons = data.data;
+      bpdb.addData('buttons', data.data);
+    });
   };
   //获取等级数据
   var getleveldata = function () {
@@ -76,7 +68,7 @@ var thinghigh = (function () {
   };
   //初始化
   var start = function () {
-    bpdb.openDB(myDB);
+    bpdb.start(myDB);
   };
   return {
     start: start,

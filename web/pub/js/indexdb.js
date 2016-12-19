@@ -1,5 +1,11 @@
 //indexedDB的本地数据库操作
 var bpdb = (function () {
+  var myDB = {};
+  //初始化数据
+  var start = function(data){
+    myDB = data;
+    openDB(myDB);
+  };
   var db, db2;
   //打开数据库
   var openDB = function (myDB) {
@@ -11,6 +17,10 @@ var bpdb = (function () {
     request.onsuccess = function (e) {
       myDB.db = e.target.result;
       db = e.target.result;
+      // db.deleteObjectStore('students');
+      // var transaction = db.transaction('students', 'readwrite');
+      // var store = transaction.objectStore('students');
+      // store.delete(value);
       myDB.callback();
     };
     request.onupgradeneeded = function (e) {
@@ -95,6 +105,7 @@ var bpdb = (function () {
     deleteDataByKey: deleteDataByKey,
     clearObjectStore: clearObjectStore,
     deletestroe: deletestroe,
-    db: db
+    db: db,
+    start: start
   }
 }());
