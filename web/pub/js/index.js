@@ -50,6 +50,7 @@ var thinghigh = (function () {
     callback: function () {
       getbuttonsdata();
       getleveldata();
+      // deletestroe(thinghigh.myDB.db);
       // clearObjectStore(myDB.db, 'students');
       // addData(myDB.db, 'students');
       // getDataByKey(myDB.db, 'students', 1)
@@ -58,11 +59,11 @@ var thinghigh = (function () {
   //获取按钮模块数据
   var getbuttonsdata = function () {
     if(myDB.db.objectStoreNames.contains('buttons')){
-
+      
     }else{
       ajax('/js/data/buttons.json', {}, function (data) {
         right.buttons = data.data;
-        addData(thinghigh.myDB.db, 'buttons', data.data);
+        bpdb.addData('buttons', data.data);
       });
     }
   };
@@ -73,8 +74,9 @@ var thinghigh = (function () {
       console.log();
     });
   };
+  //初始化
   var start = function () {
-    openDB(myDB);
+    bpdb.openDB(myDB);
   };
   return {
     start: start,
