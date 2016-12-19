@@ -3,27 +3,7 @@ var left = new Vue({
   el: '#left',
   data: {
     //等级数组
-    level: [{
-      li: '10'
-    }, {
-      li: '9'
-    }, {
-      li: '8'
-    }, {
-      li: '7'
-    }, {
-      li: '6'
-    }, {
-      li: '5'
-    }, {
-      li: '4'
-    }, {
-      li: '3'
-    }, {
-      li: '2'
-    }, {
-      li: '1'
-    }]
+    level: []
   }
 });
 
@@ -32,44 +12,19 @@ var right = new Vue({
   el: '#right',
   data: {
     //button按钮
-    buttons: [{
-      name: '登录'
-    }, {
-      name: '任务'
-    }, {
-      name: '8'
-    }, {
-      name: '7'
-    }, {
-      name: '6'
-    }, {
-      name: '5'
-    }, {
-      name: '4'
-    }, {
-      name: '3'
-    }, {
-      name: '2'
-    }, {
-      name: '1'
-    }]
+    buttons: []
   }
 });
-
-
 
 //渲染中部
 var app = new Vue({
   el: '#app',
   data: {
     tasksearch: '',
-    taskli:[
-      {
-        date: '2016-12-14',
-        lidata: [
-        ]
-      }
-    ]
+    taskli: [{
+      date: '2016-12-14',
+      lidata: []
+    }]
   }
 });
 
@@ -84,3 +39,50 @@ document.onkeydown = function (event) {
     app.tasksearch = '';
   }
 };
+
+//thinghigh初始化模块
+var thinghigh = (function () {
+  //初始化本地myDB数据库
+  var myDB = {
+    name: 'thinghigh',
+    version: 1,
+    db: null,
+    callback: function () {
+      getbuttonsdata();
+      getleveldata();
+      // clearObjectStore(myDB.db, 'students');
+      // addData(myDB.db, 'students');
+      // getDataByKey(myDB.db, 'students', 1)
+    }
+  };
+  //获取按钮模块数据
+  var getbuttonsdata = function () {
+    if(myDB.db.objectStoreNames.contains('buttons')){
+
+    }else{
+      ajax('/js/data/buttons.json', {}, function (data) {
+        right.buttons = data.data;
+        addData(thinghigh.myDB.db, 'buttons', data.data);
+      });
+    }
+  };
+  //获取等级数据
+  var getleveldata = function () {
+    ajax('/js/data/level.json', {}, function (data) {
+      left.level = data.data;
+      console.log();
+    });
+  };
+  var start = function () {
+    openDB(myDB);
+  };
+  return {
+    start: start,
+    myDB: myDB
+  };
+}());
+
+//全局初始化
+$(function () {
+  thinghigh.start();
+});

@@ -55,8 +55,8 @@
           <div class="task_ready_li" v-for="index in item.lidata">
             <div class="task_ready_li_complete">OK</div>
             <div class="task_ready_li_year">2016-12-17</div>
-            <input class="task_ready_li_name" v-model="index.name">
-            <!--<div class="task_ready_li_name" contenteditable="true" v-text="index.name"></div>-->
+            <!--<input class="task_ready_li_name" v-model="index.name">-->
+            <div class="task_ready_li_name" v-text="index.name"></div>
           </div>
         </div>
         <!--未完成 end-->
@@ -72,6 +72,7 @@
 	</div>
 	<!--中部分主体 end-->
 
+  <script src="/js/indexdb.js" charset="utf-8"></script>
 	<script src="/js/index.min.js" charset="utf-8"></script>
 </body>
 </html>
