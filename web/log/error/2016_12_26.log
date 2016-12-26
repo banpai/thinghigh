@@ -1,0 +1,2 @@
+16:04:03: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@ order by updatetime asc' at line 1：select * from level where type = @wYf_SqL@ order by updatetime asc
+16:04:37: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@ order by updatetime asc' at line 1：select * from level where type = @wYf_SqL@ order by updatetime asc

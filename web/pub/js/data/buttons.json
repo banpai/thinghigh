@@ -4,7 +4,7 @@
   "data": [{
     "id": 0,
     "name": "登录",
-    "state": "task"
+    "state": "login"
   }, {
     "id": 1,
     "name": "任务",
@@ -15,8 +15,8 @@
     "state": "code"
   }, {
     "id": 3,
-    "name": "任务",
-    "state": "task"
+    "name": "写代码",
+    "state": "write"
   }, {
     "id": 4,
     "name": "任务",

@@ -101,13 +101,13 @@ body {
   border-radius: .5rem;
   position: relative;
 }
-#app #task .task_header{
+#app .task_header{
   height: 35px;
   position: absolute;
   width: 100%;
   z-index: 100;
 }
-#app #task .addtask{
+#app .addtask{
   border: 0;
   width: 100%;
   height: 100%;
@@ -195,6 +195,45 @@ body {
   text-align: center;
 }
 /*任务 end*/
+
+/*代码库 start*/
+  #app{
+    #code{
+      height: 100%;
+      border-radius: .5rem;
+      position: relative;
+      .switch{
+        position: absolute;
+        right: 15px;
+        top: 5px;
+      }
+      .bordjilian{
+        width: 100%;
+        height: 100%;
+        border-bottom: 1px solid #e0e0e0;
+        .jilian{
+        border: 0px;
+        position: absolute;
+        text-align: center;
+        width: 50%;
+        right: 50%;
+        margin-right: -25%;
+        input{
+          border: 0;
+          font-size: 20px;
+          text-align: center;
+          outline: none;
+        }
+        input:focus{
+          outline:none;
+        }
+      }
+      }
+    }
+  }
+/*代码库 start*/
+
+
 /*主体部分 end*/
 
 .title {
