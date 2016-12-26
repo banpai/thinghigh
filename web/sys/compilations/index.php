@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="/@system/js/vue.js"></script>
 </head>
 <body>
+<meta name="viewport" content="width=640,user-scalable=no" />
 	<link rel="stylesheet" href="/css/index.css">
 	<!--云 start-->
 	<div id="sky">
@@ -33,7 +34,7 @@
 
 	<!--right start-->
 	<div id="right" class="bian">
-    <div class="li" v-for="item in buttons">
+    <div class="li" v-for="item in buttons" v-on:click="cgmk(item.state)">
       <p class="word" v-text="item.name"></p>
     </div>
 	</div>
@@ -43,7 +44,7 @@
 	<div id="app">
 
 		<!--任务 start-->
-    <div id="task">
+    <div id="task" v-if="model === 'task'">
       <!--搜索 start-->
       <div class="task_header">
         <input v-model="tasksearch" placeholder="增加任务，按回车键添加" class="addtask">
@@ -69,10 +70,14 @@
     </div>
 		<!--任务 end-->
 
+    <!--代码库 start-->
+    <div id="code" v-if="model === 'code'">
+      <h1>代码库</h1>
+    </div>
+    <!--代码库 end-->
 	</div>
 	<!--中部分主体 end-->
 
-  <script src="/js/indexdb.js" charset="utf-8"></script>
 	<script src="/js/index.min.js" charset="utf-8"></script>
 </body>
 </html>

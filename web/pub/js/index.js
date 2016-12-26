@@ -6,21 +6,26 @@ var left = new Vue({
     level: []
   }
 });
-
 //right 渲染
 var right = new Vue({
   el: '#right',
   data: {
     //button按钮
     buttons: []
+  },
+  methods: {
+    cgmk: function (s) {
+      app.model = s;
+    }
   }
 });
-
 //渲染中部
 var app = new Vue({
   el: '#app',
   data: {
     tasksearch: '',
+    //模块的显示隐藏
+    model: 'task',
     taskli: [{
       date: '2016-12-14',
       lidata: []
@@ -42,21 +47,10 @@ document.onkeydown = function (event) {
 
 //thinghigh初始化模块
 var thinghigh = (function () {
-  //初始化本地myDB数据库
-  var myDB = {
-    name: 'thinghigh',
-    version: 1,
-    db: null,
-    callback: function () {
-      getbuttonsdata();
-      getleveldata(); 
-    }
-  };
   //获取按钮模块数据
   var getbuttonsdata = function () {
      ajax('/js/data/buttons.json', {}, function (data) {
       right.buttons = data.data;
-      bpdb.addData('buttons', data.data);
     });
   };
   //获取等级数据
@@ -68,11 +62,11 @@ var thinghigh = (function () {
   };
   //初始化
   var start = function () {
-    bpdb.start(myDB);
+    getbuttonsdata();
+    getleveldata();
   };
   return {
-    start: start,
-    myDB: myDB
+    start: start
   };
 }());
 
