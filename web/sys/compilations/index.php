@@ -20,14 +20,14 @@
   <!-- 引入组件库 -->
   <script src="//unpkg.com/iview/dist/iview.min.js"></script>
 	<!--云 start-->
-	<div id="sky">
+	<!--<div id="sky">
 		<div class="clound s1"></div>
 		<div class="clound s2"></div>
 		<div class="clound s3"></div>
 		<div class="clound s4"></div>
 		<div class="clound s5"></div>
 		<div class="clound s6"></div>
-	</div>
+	</div>-->
 	<!--云 end-->
 
 	<!--left start-->
@@ -79,25 +79,47 @@
 
     <!--代码库 start-->
     <div id="code" v-if="model === 'code'">
+
        <!--搜索 start-->
       <div class="task_header">
         <!--按钮开关 start-->
-        <Switch @on-change="change" class="switch"></Switch>
+        <Switch @on-change="change" class="switch" size="large">
+          <span slot="open">选择</span>
+          <span slot="close">搜索</span>
+        </Switch>
         <!--按钮开关 end-->
         <!--级联选择 start-->
-        <div class="bordjilian" v-if="jilian">
-          <Cascader :data="data" trigger="hover" class="jilian"></Cascader>
+        <div class="bordjilian" v-if="!jilian">
+          <Cascader :data="codename" trigger="hover" class="jilian" :render-format="format"></Cascader>
         </div>
         <!--级联选择 end-->
-        <input  v-if="!jilian" v-model="codesearch" placeholder="代码名称，按回车键搜索" class="addtask">
+        <input  v-if="jilian" v-model="codesearch" placeholder="代码名称，按回车键搜索" class="addtask">
       </div>
       <!--搜索 end-->
-      <div style="height: 200px;"></div>
-      <i-button @click="show">Click me!</i-button>
-      <Modal :visible.sync="visible" title="Welcome">欢迎使用 iView</Modal>
-      <div v-html="compiledMarkdown" class="wysiwyg"></div>
+
+      <!--显示代码 start-->
+      <div v-html="codecontent | marked" class="wysiwyg codecontent"></div>
+      <!--显示代码 end-->
+
     </div>
     <!--代码库 end-->
+
+    <!--写代码 start-->
+    <div id="write" v-if="model === 'write'">
+      <!--头部输入名称 start-->
+      <i-input>
+          <i-select :model.sync="select3" slot="prepend" style="width: 80px">
+              <i-option value="1">javascript</i-option>
+              <i-option value="2">php</i-option>
+              <i-option value="3">mysql</i-option>
+              <i-option value="4">css</i-option>
+              <i-option value="5">html</i-option>
+              <i-option value="6">mixed</i-option>
+          </i-select>
+      </i-input>
+      <!--头部输入名称 end-->
+    </div>
+    <!--写代码 end-->
 	</div>
 	<!--中部分主体 end-->
 

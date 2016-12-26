@@ -19,27 +19,7 @@
     "state": "write"
   }, {
     "id": 4,
-    "name": "任务",
-    "state": "task"
-  }, {
-    "id": 5,
-    "name": "任务",
-    "state": "task"
-  }, {
-    "id": 6,
-    "name": "任务",
-    "state": "task"
-  }, {
-    "id": 7,
-    "name": "任务",
-    "state": "task"
-  }, {
-    "id": 8,
-    "name": "任务",
-    "state": "task"
-  }, {
-    "id": 9,
-    "name": "任务",
-    "state": "task"
+    "name": "项目自测",
+    "state": "selftest"
   }]
 }

@@ -22,13 +22,25 @@ DROP TABLE IF EXISTS `code`;
 CREATE TABLE `code` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_guid` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户guid',
-  `type` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT 'type:1:js,2:php,3:mysql,4:mixed',
+  `type` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT 'type:1:javascript,2:php,3:mysql,4:css,5:html,6:mixed',
   `title` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '搜索名称',
   `content` varchar(20000) COLLATE utf8_bin DEFAULT '' COMMENT '代码内容',
   `createtime` datetime DEFAULT NULL COMMENT '创建时间',
   `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='代码库表';
+
+DROP TABLE IF EXISTS `codename`;
+CREATE TABLE `codename` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `user_guid` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户guid',
+  `codeid` varchar(20) COLLATE utf8_bin DEFAULT '' COMMENT 'code表的id',
+  `type` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT 'type:1:javascript,2:php,3:mysql,4:css,5:html,6:mixed',
+  `title` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '搜索名称',
+  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
+  `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='代码名称表';
 
 -- ----------------------------
 -- Records of code
@@ -88,14 +100,10 @@ INSERT INTO `user` VALUES ('1', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '半拍'
 -- ----------------------------
 -- Table structure for worknote
 -- ----------------------------
-DROP TABLE IF EXISTS `worknote`;
-CREATE TABLE `worknote` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `name` varchar(20) COLLATE utf8_bin DEFAULT '' COMMENT '日志名称',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='工作日志表一级';
+
 
 -- ----------------------------
 -- Records of worknote
 -- ----------------------------
+
+

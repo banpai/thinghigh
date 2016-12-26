@@ -1,2 +1,15 @@
 16:04:03: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@ order by updatetime asc' at line 1：select * from level where type = @wYf_SqL@ order by updatetime asc
 16:04:37: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@ order by updatetime asc' at line 1：select * from level where type = @wYf_SqL@ order by updatetime asc
+23:21:13: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:22:44: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:27:37: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:30:23: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:32:00: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:33:50: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:35:05: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:37:47: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:38:46: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:40:09: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:42:06: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:49:47: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
+23:57:07: Table 'thinghigh.level' doesn't exist：select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10
