@@ -23,6 +23,7 @@ var right = new Vue({
 var app = new Vue({
   el: '#app',
   data: {
+    input: '# hello',
     tasksearch: '',
     //模块的显示隐藏
     model: 'task',
@@ -30,6 +31,16 @@ var app = new Vue({
       date: '2016-12-14',
       lidata: []
     }]
+  },
+  computed: {
+    compiledMarkdown: function () {
+      return marked(this.input, { sanitize: true })
+    }
+  },
+  methods: {
+    update: function(e){
+      this.input = e.target.value;
+    }
   }
 });
 
@@ -45,25 +56,44 @@ document.onkeydown = function (event) {
   }
 };
 
+//统一管理接口
+var portsfun = (function(){
+    //获取按钮模块数据
+    var getbuttonsdata = function () {
+      ajax('/js/data/buttons.json', {}, function (data) {
+        right.buttons = data.data;
+      });
+    };
+    //获取等级数据
+    var getleveldata = function () {
+      ajax('/js/data/level.json', {}, function (data) {
+        left.level = data.data;
+      });
+    };
+    //获取代码库的代码
+    var getcode = function(){
+      
+      ajax('index-code.html', {
+        type: '2'
+      }, function(data){
+        var xx = JSON.stringify(data);
+        console.log(xx);
+      });
+    };
+    return {
+      getbuttonsdata: getbuttonsdata,
+      getleveldata: getleveldata,
+      getcode: getcode
+    };
+}());
+
 //thinghigh初始化模块
 var thinghigh = (function () {
-  //获取按钮模块数据
-  var getbuttonsdata = function () {
-     ajax('/js/data/buttons.json', {}, function (data) {
-      right.buttons = data.data;
-    });
-  };
-  //获取等级数据
-  var getleveldata = function () {
-    ajax('/js/data/level.json', {}, function (data) {
-      left.level = data.data;
-      console.log();
-    });
-  };
   //初始化
   var start = function () {
-    getbuttonsdata();
-    getleveldata();
+    portsfun.getbuttonsdata();
+    portsfun.getleveldata();
+    portsfun.getcode();
   };
   return {
     start: start

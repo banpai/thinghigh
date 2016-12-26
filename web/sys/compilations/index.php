@@ -11,7 +11,10 @@
 </head>
 <body>
 <meta name="viewport" content="width=640,user-scalable=no" />
+  <link rel="stylesheet" href="/css/wysiwyg.css">
 	<link rel="stylesheet" href="/css/index.css">
+  <script src="/js/marked.min.js" charset="utf-8"></script>
+
 	<!--云 start-->
 	<div id="sky">
 		<div class="clound s1"></div>
@@ -72,9 +75,13 @@
 
     <!--代码库 start-->
     <div id="code" v-if="model === 'code'">
-      <h1>代码库</h1>
+      <div id="editor">
+        <textarea :value="input" @input="update"></textarea>
+        <div v-html="compiledMarkdown" class="wysiwyg"></div>
+      </div>
     </div>
     <!--代码库 end-->
+
 	</div>
 	<!--中部分主体 end-->
 
