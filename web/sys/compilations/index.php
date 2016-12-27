@@ -98,7 +98,21 @@
           <Cascader :data="codename" trigger="hover" class="jilian" :render-format="format"></Cascader>
         </div>
         <!--级联选择 end-->
+        <!--点击搜索 start-->
         <input  v-if="jilian" v-model="codesearch" placeholder="代码名称，按回车键搜索" class="addtask">
+        <!--点击搜索 end-->
+        <!--删除和编辑模块 start-->
+         <Dropdown trigger="click" placement="bottom-start">
+            <a href="javascript:void(0)">
+                事件
+                <Icon type="arrow-down-b"></Icon>
+            </a>
+            <Dropdown-menu slot="list">
+                <Dropdown-item v-on:click="code_chang">修改</Dropdown-item>
+                <Dropdown-item v-on:click="code_delete">删除</Dropdown-item>
+            </Dropdown-menu>
+        </Dropdown>
+        <!--删除和编辑模块 end-->
       </div>
       <!--搜索 end-->
 

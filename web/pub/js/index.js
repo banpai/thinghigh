@@ -97,6 +97,14 @@ var app = new Vue({
       }
       // return labels[index];
     },
+    //代码库修改代码
+    code_chang: function(){
+      alert('xxx');
+    },
+    //代码库删除代码
+    code_delete: function(){
+      alert('shchu');
+    },
     //编写代码库的提交
     write_sub: function(){
       if(!this.write_name){

@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地
+Source Server         : 本地数据库
 Source Server Version : 50540
 Source Host           : localhost:3306
 Source Database       : thinghigh
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-12-27 02:32:26
+Date: 2016-12-27 13:34:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,119 +28,46 @@ CREATE TABLE `code` (
   `createtime` datetime DEFAULT NULL COMMENT '创建时间',
   `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='代码库表';
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='代码库表';
 
 -- ----------------------------
 -- Records of code
 -- ----------------------------
 INSERT INTO `code` VALUES ('1', '', '2', '存单表数据', '> 框架方法：将post过来的数据存入数据库\n\n~~~\n$time = date(\"Y-m-d H:i:s\"); // 获取当前时间\n$sql = \"INSERT INTO \".$codename.\" (user_guid,title,content,createtime) values(?,?,?,?)\";\n$rs1 = $db->execute($sql, array($user_guid, $title, $textcode, $time));\n~~~', '2016-12-26 15:31:39', '2016-12-26 15:31:41');
+INSERT INTO `code` VALUES ('8', '', '1', '获取省份证号码信息', '~~~\nfunction IdCard(UUserCard, num) {\n    if (num == 1) {\n        //获取出生日期\n        birth = UUserCard.substring(6, 10) + \"-\" + UUserCard.substring(10, 12) + \"-\" + UUserCard.substring(12, 14);\n        return birth;\n    }\n    if (num == 2) {\n        //获取性别\n        if (parseInt(UUserCard.substr(16, 1)) % 2 == 1) {\n            //男\n            return \"男\";\n        } else {\n            //女\n            return \"女\";\n        }\n    }\n    if (num == 3) {\n        //获取年龄\n        var myDate = new Date();\n        var month = myDate.getMonth() + 1;\n        var day = myDate.getDate();\n        var age = myDate.getFullYear() - UUserCard.substring(6, 10) - 1;\n        if (UUserCard.substring(10, 12) < month || UUserCard.substring(10, 12) == month && UUserCard.substring(12, 14) <= day) {\n            age++;\n        }\n        return age;\n    }\n}\n~~~', '2016-12-27 11:36:04', '2016-12-27 11:36:04');
+INSERT INTO `code` VALUES ('9', '', '4', 'fixed居中', '~~~\n.btnfbtm {\n    position: fixed;\n    bottom: 0;\n    width: 980px;\n    height: 60px;\n    right: 30px;\n    margin:auto;\n    left:0;\n    right:0;\n    bottom:0;\n}\n~~~', '2016-12-27 11:38:49', '2016-12-27 11:38:49');
+INSERT INTO `code` VALUES ('10', '', '2', '跳转页面', '~~~\nPage::view($url);\n\nRedirect::to($url);\n~~~', '2016-12-27 11:41:11', '2016-12-27 11:41:11');
+INSERT INTO `code` VALUES ('11', '', '5', '滚动加载', '~~~\n<style media=\"screen\">\n    .copyright{\n        margin-bottom: 100px;\n    }\n</style>\n\n<style>\n    #gddw{\n        position: fixed;\n        bottom: 15px;\n        left: 50%;\n        margin-left: -65px;\n        display: none;\n    }\n</style>\n\n<div id=\"gddw\" class=\"weui-infinite-scroll\">\n  <div class=\"infinite-preloader\"></div><!-- 菊花 -->\n  正在加载... <!-- 文案，可以自行修改 -->\n</div>\n\n\n\n//滚动加载\nvar gdjz = (function () {\n    var gdcallback;\n    //初始化事件\n    var infinite = function () {\n        $(document.body).infinite();\n    };\n    //销毁事件\n    var end = function () {\n        $(\'#gddw\').hide();\n        $(document.body).destroyInfinite();\n    };\n    //监听事件\n    var watch = function () {\n        var loading = false;  //状态标记\n        $(document.body).infinite().on(\"infinite\", function () {\n            if (loading) return;\n            $(\'#gddw\').show();\n            loading = true;\n            setTimeout(function () {\n                gdcallback();\n                loading = false;\n                $(\'#gddw\').hide();\n            }, 1500);   //模拟延迟\n        });\n    };\n    var start = function (callback) {\n        infinite();\n        watch();\n        gdcallback = callback;\n    };\n    return {\n        start: start,\n        end: end\n    }\n}());\n\n        gdjz.start();\n~~~', '2016-12-27 11:52:00', '2016-12-27 11:52:00');
+INSERT INTO `code` VALUES ('12', '', '3', 'pubs_official(后台授权)', '~~~\n/*\nNavicat MySQL Data Transfer\n\nSource Server         : localhost\nSource Server Version : 50547\nSource Host           : localhost:3306\nSource Database       : wy_zlqgh\n\nTarget Server Type    : MYSQL\nTarget Server Version : 50547\nFile Encoding         : 65001\n\nDate: 2016-08-12 09:44:44\n*/\n\nSET FOREIGN_KEY_CHECKS=0;\n\n-- ----------------------------\n-- Table structure for pubs_official\n-- ----------------------------\nDROP TABLE IF EXISTS `pubs_official`;\nCREATE TABLE `pubs_official` (\n  `id` bigint(20) NOT NULL AUTO_INCREMENT,\n  `wid` bigint(20) NOT NULL,\n  `invokeid` varchar(20) NOT NULL COMMENT \'接口标识\',\n  `name` varchar(100) DEFAULT NULL COMMENT \'公众号名称\',\n  `appid` varchar(50) NOT NULL COMMENT \'接口ID\',\n  `logo` varchar(255) DEFAULT NULL COMMENT \'公众号头像\',\n  `type` tinyint(2) DEFAULT NULL COMMENT \'授权方公众号类型，0代表订阅号，1代表由历史老帐号升级后的订阅号，2代表服务号\',\n  `qrcode` varchar(255) DEFAULT NULL COMMENT \'二维码地址\',\n  `accesstoken` varchar(512) NOT NULL COMMENT \'调用接口access_token\',\n  `accesstoken_lastupdate` datetime NOT NULL COMMENT \'调用接口access_token最后更新时间\',\n  `state` tinyint(1) DEFAULT \'0\' COMMENT \'0:未授权 1:已授权\',\n  `createtime` datetime NOT NULL COMMENT \'权限签名\',\n  `updatetime` datetime NOT NULL COMMENT \'调用接口jsapi_ticket最后更新时间\',\n  PRIMARY KEY (`id`)\n) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT=\'公众号基本信息表\';\n\n-- ----------------------------\n-- Records of pubs_official\n-- ----------------------------\nINSERT INTO `pubs_official` VALUES (\'1\', \'1\', \'dy93d7f96b93eb4308da\', \'萭事通\', \'wx08de066938343eb9\', \'http://wx.qlogo.cn/mmopen/TvjQ8s7myLBRhC9JWBFJfGU22Qd6AOrtOp8jmuE1aJBxbRNqYopks3vHjbUbTTYPo5SpYV8mUyHV1COQsYVibLmpwhzHDghwk/0\', \'2\', \'http://mmbiz.qpic.cn/mmbiz/qMLYktpIZfGf16DSGBfUVKX\', \'2lAihUFhKM8WLRXovClc2Mx5fnGVkWZJhPlydsIX4XG91qlfck6M9O8KdWMEctvH5YaY7rN8ll5qzhQQSe_3Z0jyyp\', \'2016-08-09 10:15:16\', \'1\', \'2016-08-09 10:15:18\', \'2016-08-09 10:15:20\');\nINSERT INTO `pubs_official` VALUES (\'3\', \'1\', \'dy9ba170ec4321e409ee\', \'微校云\', \'wxbc793b5d2aabb6cf\', \'http://wx.qlogo.cn/mmopen/SLT3TvgmPkBYuvJMMHbakQpyvC604RRI95mWia0Zo5S1n0nS990cQpaCEzK9sRntj4fJH84lyl4AmyvrMMxLWGVpjefTuT6y1/0\', \'2\', \'http://mmbiz.qpic.cn/mmbiz/VS9tepwuTF0SOOoXawO5MNOV2aUdYsUNwqQSZA0JJU3iagpnY2BTicDdPr4qoA2vPiaFJbaq5CDumnbrYWyRjFLXg/0\', \'ylT-lKAOmRGog2NrbwMlV04RXTLmfOET6J6wfhYBCFQmmCHwZayk5Rqg_0SEigDk05mZsh5ogbmXqDrpN50NE6fOS9\', \'2016-08-09 13:38:05\', \'1\', \'2016-08-09 12:33:38\', \'2016-08-09 13:38:05\');\n\n~~~', '2016-12-27 12:00:25', '2016-12-27 12:00:25');
 
 -- ----------------------------
--- Table structure for codename
+-- Table structure for level
 -- ----------------------------
-DROP TABLE IF EXISTS `codename`;
-CREATE TABLE `codename` (
+DROP TABLE IF EXISTS `level`;
+CREATE TABLE `level` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_guid` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户guid',
-  `codeid` varchar(20) COLLATE utf8_bin DEFAULT '' COMMENT 'code表的id',
-  `type` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT 'type:1:javascript,2:php,3:mysql,4:css,5:html,6:mixed',
-  `title` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '搜索名称',
+  `li` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户的等级',
+  `state` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '0：未到等级，1：已到等级',
   `createtime` datetime DEFAULT NULL COMMENT '创建时间',
   `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='代码名称表';
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='等级表';
 
 -- ----------------------------
--- Records of codename
+-- Records of level
 -- ----------------------------
-INSERT INTO `codename` VALUES ('1', '', '1', '2', '存单表数据', '2016-12-27 00:32:53', '2016-12-27 00:32:56');
-
--- ----------------------------
--- Table structure for code_js
--- ----------------------------
-DROP TABLE IF EXISTS `code_js`;
-CREATE TABLE `code_js` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user_guid` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户guid',
-  `title` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '搜索名称',
-  `content` varchar(20000) COLLATE utf8_bin DEFAULT '' COMMENT '代码内容',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
-  `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='js代码库表';
-
--- ----------------------------
--- Records of code_js
--- ----------------------------
-INSERT INTO `code_js` VALUES ('1', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '案例', '> 这里是背景注释第1行\n\n> 这里是背景注释第2行\n\n> 这里是背景注释第3行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-07-18 12:41:00', null);
-INSERT INTO `code_js` VALUES ('2', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '案列', '> 这里是背景注释第1行\n\n> 这里是背景注释第2行\n\n> 这里是背景注释第3行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-07-18 12:48:31', null);
-INSERT INTO `code_js` VALUES ('3', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '案列', '> 这里是背景注释第1行\n\n> 这里是背景注释第2行\n\n> 这里是背景注释第3行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-07-18 12:53:57', null);
-INSERT INTO `code_js` VALUES ('4', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '设计表的公共样式', '> 设计表的公共样式\n\n~~~\n//样式模板\nDROP TABLE IF EXISTS `coursewaretype`;\nCREATE TABLE `coursewaretype` (\n  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT \'编号\',\n  `typename` varchar(20) DEFAULT \'\' COMMENT \'类型名称\',\n  `typeinfo` varchar(200) DEFAULT \'\' COMMENT \'类型介绍\',\n  `createtime` datetime DEFAULT NULL COMMENT \'创建时间\',\n  `createop` varchar(10) DEFAULT NULL COMMENT \'创建者\',\n  `updatetime` datetime DEFAULT NULL COMMENT \'更新时间\',\n  `updateop` varchar(10) DEFAULT NULL COMMENT \'更新者\',  \n  PRIMARY KEY (`id`)\n) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT \'课件类型表\';\n~~~', '2016-07-18 13:05:09', null);
-INSERT INTO `code_js` VALUES ('5', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '设计表的公共样式', '> 设计表的公共样式\n\n~~~\n//样式模板\nDROP TABLE IF EXISTS `coursewaretype`;\nCREATE TABLE `coursewaretype` (\n  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT \'编号\',\n  `typename` varchar(20) DEFAULT \'\' COMMENT \'类型名称\',\n  `typeinfo` varchar(200) DEFAULT \'\' COMMENT \'类型介绍\',\n  `createtime` datetime DEFAULT NULL COMMENT \'创建时间\',\n  `createop` varchar(10) DEFAULT NULL COMMENT \'创建者\',\n  `updatetime` datetime DEFAULT NULL COMMENT \'更新时间\',\n  `updateop` varchar(10) DEFAULT NULL COMMENT \'更新者\',  \n  PRIMARY KEY (`id`)\n) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT \'课件类型表\';\n~~~', '2016-07-18 13:05:09', null);
-INSERT INTO `code_js` VALUES ('6', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', 'banner轮播', '> 自己写的并且封装的banner轮播\n\n~~~\n//banner方法封装\nvar banner = (function () {\n    var j = 0,\n        len, thatdom, timesetinterval, flagok, quandom;\n    //隐藏显示\n    var banneranimate = function (j) {\n        thatdom.css(\"display\", \"none\");\n        thatdom.each(function (i) {\n            if (i === j) {\n                $(this).animate({\n                    display: \'block\',\n                    opacity: \'toggle\'\n                }, \"100\");\n            }\n        });\n        yuanquanshow();\n    };\n    //添加圆圈\n    var yuanquanfun = function () {\n        quandom.append(function () {\n            var str = \"<li></li>\";\n            var strcircle = \"\";\n            for (var i = 0; i < len; i++) {\n                strcircle = strcircle + str;\n            }\n            return strcircle;\n        });\n        quandom.find(\"li\").each(function (i) {\n            $(this).click(function () {\n                clearInterval(flagok);\n                j = i;\n                banneranimate(j);\n                timeevery();\n            });\n        });\n        yuanquanshow();\n    };\n    //圆圈显示\n    var yuanquanshow = function () {\n        quandom.find(\"li\").each(function (i) {\n            $(this).css(\"background\", \"#fff\");\n            if (i === j) {\n                $(this).css(\"background\", \"#ED6C00\");\n            }\n        });\n    };\n    //添加定时函数\n    var timeevery = function () {\n        flagok = setInterval(function () {\n            j = j + 1;\n            if (j === len) {\n                j = 0;\n            }\n            banneranimate(j, thatdom);\n        }, timesetinterval);\n    };\n    //开始\n    var start = function (thatimgdom, circledom, time) {\n        len = thatimgdom.length;\n        thatdom = thatimgdom;\n        quandom = circledom;\n        timesetinterval = time;\n        banneranimate(j);\n        timeevery();\n        yuanquanfun();\n    };\n    //点击耳朵\n    var ear = function (flagclick) {\n        clearInterval(flagok);\n        if (flagclick === \"left\") {\n            j = j - 1;\n            if (j === -1) {\n                j = (len - 1);\n            }\n        }\n        if (flagclick === \"right\") {\n            j = j + 1;\n            if (j === len) {\n                j = 0;\n            }\n        }\n        banneranimate(j);\n        timeevery();\n    };\n    return {\n        start: start,\n        ear: ear\n    }\n} ());\n\n//运行\nvar imgdom = $(\".header_banner\").find(\".header_banner_img\");\nvar circledom = $(\".clickcircle\").find(\"ul\");\nbanner.start(imgdom, circledom, 8000);\n~~~', '2016-07-20 11:19:07', null);
-INSERT INTO `code_js` VALUES ('7', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', 'xxxx', '> 这里是背景注释第1行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-08-06 11:36:29', null);
-
--- ----------------------------
--- Table structure for code_mixed
--- ----------------------------
-DROP TABLE IF EXISTS `code_mixed`;
-CREATE TABLE `code_mixed` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user_guid` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户guid',
-  `title` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '搜索名称',
-  `content` varchar(20000) COLLATE utf8_bin DEFAULT '' COMMENT '代码内容',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
-  `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='java代码库表';
-
--- ----------------------------
--- Records of code_mixed
--- ----------------------------
-INSERT INTO `code_mixed` VALUES ('1', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '模板一', '> 这里是背景注释第1行\n\n> 这里是背景注释第2行\n\n> 这里是背景注释第3行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-07-18 15:14:41', null);
-INSERT INTO `code_mixed` VALUES ('2', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', 'hh', '> 这里是背景注释第1行\n\n> 这里是背景注释第2行\n\n> 这里是背景注释第3行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-07-18 15:26:35', null);
-INSERT INTO `code_mixed` VALUES ('3', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '使用 Flexbox 的居中布局', '~~~\n.vertical-container {\n  height: 300px;\n  display: -webkit-flex;\n  display:         flex;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n}\n~~~', '2016-07-19 16:33:39', null);
-
--- ----------------------------
--- Table structure for code_mysql
--- ----------------------------
-DROP TABLE IF EXISTS `code_mysql`;
-CREATE TABLE `code_mysql` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user_guid` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户guid',
-  `title` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '搜索名称',
-  `content` varchar(20000) COLLATE utf8_bin DEFAULT '' COMMENT '代码内容',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
-  `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='mysql代码库表';
-
--- ----------------------------
--- Records of code_mysql
--- ----------------------------
-INSERT INTO `code_mysql` VALUES ('1', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '案列', '> 这里是背景注释第1行\n\n> 这里是背景注释第2行\n\n> 这里是背景注释第3行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-07-18 12:54:36', null);
-INSERT INTO `code_mysql` VALUES ('2', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '公司设计表的模板', '> 公司设计表的模板\n\n~~~\n//表的模板\nDROP TABLE IF EXISTS `coursewaretype`;\nCREATE TABLE `coursewaretype` (\n  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT \'编号\',\n  `typename` varchar(20) DEFAULT \'\' COMMENT \'类型名称\',\n  `typeinfo` varchar(200) DEFAULT \'\' COMMENT \'类型介绍\',\n  `createtime` datetime DEFAULT NULL COMMENT \'创建时间\',\n  `createop` varchar(10) DEFAULT NULL COMMENT \'创建者\',\n  `updatetime` datetime DEFAULT NULL COMMENT \'更新时间\',\n  `updateop` varchar(10) DEFAULT NULL COMMENT \'更新者\',  \n  PRIMARY KEY (`id`)\n) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT \'课件类型表\';\n~~~', '2016-07-18 13:16:57', null);
-INSERT INTO `code_mysql` VALUES ('3', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '多表联合查询', '> 这个是多表联合查询\n\n~~~\n//这里放代码块\n $sql = \"select a.id,a.title,b.user_name from \".$codename.\" a,user b where a.user_guid = b.user_guid\";\n    $datatitle = $db->query($sql, array());\n~~~', '2016-07-18 15:48:47', null);
-
--- ----------------------------
--- Table structure for code_php
--- ----------------------------
-DROP TABLE IF EXISTS `code_php`;
-CREATE TABLE `code_php` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user_guid` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '用户guid',
-  `title` varchar(200) COLLATE utf8_bin DEFAULT '' COMMENT '搜索名称',
-  `content` varchar(20000) COLLATE utf8_bin DEFAULT '' COMMENT '代码内容',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
-  `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='php代码库表';
-
--- ----------------------------
--- Records of code_php
--- ----------------------------
-INSERT INTO `code_php` VALUES ('1', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '案列', '> 这里是背景注释第1行\n\n> 这里是背景注释第2行\n\n> 这里是背景注释第3行\n\n*这个是斜体*\n\n**这个是粗体**\n\n分割线\n***\n\n~~~\n//这里放代码块\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n      console.log(\'undefined\');\n  }\n}\n\nexport  $initHighlight;\n~~~', '2016-07-18 12:57:07', null);
-INSERT INTO `code_php` VALUES ('2', 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32', '存单表数据', '> 框架方法：将post过来的数据存入数据库\n\n~~~\n$time = date(\"Y-m-d H:i:s\"); // 获取当前时间\n$sql = \"INSERT INTO \".$codename.\" (user_guid,title,content,createtime) values(?,?,?,?)\";\n$rs1 = $db->execute($sql, array($user_guid, $title, $textcode, $time));\n~~~', '2016-07-18 13:20:44', null);
+INSERT INTO `level` VALUES ('1', '', '1', '0', '2016-12-26 15:55:30', '2016-12-26 15:55:33');
+INSERT INTO `level` VALUES ('2', '', '2', '0', null, null);
+INSERT INTO `level` VALUES ('3', '', '3', '0', null, null);
+INSERT INTO `level` VALUES ('4', '', '4', '0', null, null);
+INSERT INTO `level` VALUES ('5', '', '5', '0', null, null);
+INSERT INTO `level` VALUES ('6', '', '6', '0', null, null);
+INSERT INTO `level` VALUES ('7', '', '7', '0', null, null);
+INSERT INTO `level` VALUES ('8', '', '8', '0', null, null);
+INSERT INTO `level` VALUES ('9', '', '9', '0', null, null);
+INSERT INTO `level` VALUES ('10', '', '10', '0', null, null);
+INSERT INTO `level` VALUES ('11', '', '11', '0', null, null);
 
 -- ----------------------------
 -- Table structure for note
