@@ -108,14 +108,19 @@ if (Request::is_ajax()) {
       'data' => $set  
     ));
   }else if($action === 'putcode'){
+     $id = Request::post('id');
      $type = Request::post('type');
      $content= Request::post('content');
      $title= Request::post('title');
      $code = new Model('code');
+     if($id){
+       $code -> find(array('id' => $id));
+     }else{
+       $code -> createtime = DB::raw('now()');
+     }
      $code -> type = $type;
      $code -> title = $title;
      $code -> content = $content;
-     $code -> createtime = DB::raw('now()');
      $code -> updatetime = DB::raw('now()');
      if($code -> save()){
        Response::json(array(
@@ -126,6 +131,21 @@ if (Request::is_ajax()) {
        Response::json(array(
           'errcode' => '1',
           'errmsg' => '保存失败'
+       )); 
+     }
+  }else if($action === 'delcode'){
+    $id = Request::post('id');
+    $code = new Model('code');
+    $code -> find(array('id' => $id));
+    if($code -> remove()){
+       Response::json(array(
+          'errcode' => '0',
+          'errmsg' => ''
+       ));
+     }else{
+       Response::json(array(
+          'errcode' => '1',
+          'errmsg' => '删除失败'
        )); 
      }
   }

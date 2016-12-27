@@ -34,13 +34,6 @@
       <p class="word" v-text="item.li"></p>
     </div>
     <div id="process"></div>
-    <!--添加滑块 start-->
-    <Progress :percent="percent"></Progress>
-    <Button-group size="large">
-        <i-button icon="ios-plus-empty" @click="add"></i-button>
-        <i-button icon="ios-minus-empty" @click="minus"></i-button>
-    </Button-group>
-    <!--添加滑块 end-->
   </div>
 	<!--left end-->
 
@@ -84,7 +77,6 @@
 
     <!--代码库 start-->
     <div id="code" v-if="model === 'code'">
-
        <!--搜索 start-->
       <div class="task_header">
         <!--按钮开关 start-->
@@ -95,7 +87,7 @@
         <!--按钮开关 end-->
         <!--级联选择 start-->
         <div class="bordjilian" v-if="!jilian">
-          <Cascader :data="codename" trigger="hover" class="jilian" :render-format="format"></Cascader>
+          <Cascader :data="codename" trigger="hover" class="jilian" :render-format="format" :on-change="getcn"></Cascader>
         </div>
         <!--级联选择 end-->
         <!--点击搜索 start-->
@@ -150,6 +142,6 @@
 	<!--中部分主体 end-->
   <!-- 引入组件库 -->
   <script src="/js/iview.min.js"></script>
-	<script src="/js/index.min.js" charset="utf-8"></script>
+	<script src="/js/index.js" charset="utf-8"></script>
 </body>
 </html>
