@@ -8,7 +8,7 @@
 	<meta name="formate-detection" content="telephone=no" />
 	<title><?php echo $PAGE_TITLE != '' ? $PAGE_TITLE : '自我管理'; ?></title><script type="text/javascript">var wyf_jspath = "/@system/";</script><script type="text/javascript" src="/@system/js/jquery.js"></script><script type="text/javascript" src="/@system/js/wyfadapter.js"></script>
 	<!--<script type="text/javascript" src="/@system/js/vue.js"></script>-->
-  <script src="//v1.vuejs.org/js/vue.min.js"></script>
+  <script src="/js/vue.min.js"></script>
 </head>
 <body>
 <meta name="viewport" content="width=640,user-scalable=no" />
@@ -16,9 +16,7 @@
 	<link rel="stylesheet" href="/css/index.css">
   <script src="/js/marked.min.js" charset="utf-8"></script>
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
-  <!-- 引入组件库 -->
-  <script src="//unpkg.com/iview/dist/iview.min.js"></script>
+  <link rel="stylesheet" href="/css/iview.css">
 	<!--云 start-->
 	<!--<div id="sky">
 		<div class="clound s1"></div>
@@ -36,6 +34,13 @@
       <p class="word" v-text="item.li"></p>
     </div>
     <div id="process"></div>
+    <!--添加滑块 start-->
+    <Progress :percent="percent"></Progress>
+    <Button-group size="large">
+        <i-button icon="ios-plus-empty" @click="add"></i-button>
+        <i-button icon="ios-minus-empty" @click="minus"></i-button>
+    </Button-group>
+    <!--添加滑块 end-->
   </div>
 	<!--left end-->
 
@@ -107,8 +112,8 @@
     <!--写代码 start-->
     <div id="write" v-if="model === 'write'">
       <!--头部输入名称 start-->
-      <i-input>
-          <i-select :model.sync="select3" slot="prepend" style="width: 80px">
+      <i-input placeholder="填写名称" class="writename" :value.sync="write_name">
+          <i-select :model.sync="write_val" slot="prepend" style="width: 80px">
               <i-option value="1">javascript</i-option>
               <i-option value="2">php</i-option>
               <i-option value="3">mysql</i-option>
@@ -116,13 +121,21 @@
               <i-option value="5">html</i-option>
               <i-option value="6">mixed</i-option>
           </i-select>
+          <i-button slot="append" icon="android-upload" v-on:click="write_sub">提交</i-button>
       </i-input>
       <!--头部输入名称 end-->
+      <!--编写代码部分 start-->
+      <div id="editor">
+        <textarea v-model="write" debounce="300"></textarea>
+        <div v-html="write | marked" class="wysiwyg show_write"></div>
+      </div>
+      <!--编写代码部分 end-->
     </div>
     <!--写代码 end-->
 	</div>
 	<!--中部分主体 end-->
-
+  <!-- 引入组件库 -->
+  <script src="/js/iview.min.js"></script>
 	<script src="/js/index.min.js" charset="utf-8"></script>
 </body>
 </html>

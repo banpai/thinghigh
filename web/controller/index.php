@@ -31,16 +31,16 @@ if (Request::is_ajax()) {
     Response::json(array(
       'errcode' => '0',
       'errmsg' => '',
-      'data' => $set  
+      'data' => $set
     ));
   }else if($action == 'codename'){
-    $sql = "select * from codename";
+    $sql = "select id as codeid,title,type from code";
     $res = $db->query($sql);
     $set = array(
       array(
         'value' => 'javascript',
         'label' => 'javascript',
-        // 'children' => array()
+        'children' => array()
       ),
       array(
         'value' => 'php',
@@ -50,17 +50,17 @@ if (Request::is_ajax()) {
       array(
         'value' => 'mysql',
         'label' => 'mysql',
-        // 'children' => array()
+        'children' => array()
       ),
       array(
         'value' => 'css',
         'label' => 'css',
-        // 'children' => array()
+        'children' => array()
       ),
       array(
         'value' => 'html',
         'label' => 'html',
-        // 'children' => array()
+        'children' => array()
       )
     );
     foreach($res as $i => $v){
@@ -107,5 +107,26 @@ if (Request::is_ajax()) {
       'errmsg' => '',
       'data' => $set  
     ));
+  }else if($action === 'putcode'){
+     $type = Request::post('type');
+     $content= Request::post('content');
+     $title= Request::post('title');
+     $code = new Model('code');
+     $code -> type = $type;
+     $code -> title = $title;
+     $code -> content = $content;
+     $code -> createtime = DB::raw('now()');
+     $code -> updatetime = DB::raw('now()');
+     if($code -> save()){
+       Response::json(array(
+          'errcode' => '0',
+          'errmsg' => ''
+       ));
+     }else{
+       Response::json(array(
+          'errcode' => '1',
+          'errmsg' => '保存失败'
+       )); 
+     }
   }
 }

@@ -9,7 +9,9 @@ body {
     height: 100%;
     background: #72ADE5;
     border: 1px solid #307BC7;
-    box-shadow: inset 2.5rem 1.3rem 28rem 2.5rem #307BC7;
+    // box-shadow: inset 2.5rem 1.3rem 28rem 2.5rem #307BC7;
+    padding-right: 0px !important;
+    background: radial-gradient(#72ade5 50%, #307bc7 100%);
 }
 
 /*左边右边的共通部分 start*/
@@ -209,6 +211,7 @@ body {
         padding-bottom: 15px;
         padding-left: 15px;
         padding-right: 15px;
+        overflow-y: auto;
       }
       .switch{
         position: absolute;
@@ -219,6 +222,9 @@ body {
         width: 100%;
         height: 100%;
         border-bottom: 1px solid #e0e0e0;
+        background: #fff;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
         .jilian{
         border: 0px;
         position: absolute;
@@ -233,7 +239,7 @@ body {
         }
         .ivu-input:focus{
           outline:none;
-          box-shadow: 0 0 0 0px rgba(51,153,255,.2);
+          box-shadow: none;
         }
       }
       }
@@ -243,10 +249,81 @@ body {
 
 //写代码
 #write{
-  .ivu-select{
-    width: 150px !important;
-    .ivu-select-selected-value{
+  height: 100%;
+  #editor{
+    border-radius: .5rem;
+    height: 100%;
+    margin-top: -35px;
+    textarea{
+      padding-top: 50px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-bottom-left-radius: .5rem;
+      border-top-left-radius: .5rem;
+    }
+    .show_write{
+      padding-top: 50px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-bottom-right-radius: .5rem;
+      overflow-y: auto;
+    }
+  }
+  .vertical-center-modal{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .ivu-modal{
+          top: 0;
+      }
+  }
+  .writename{
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    height: 35px;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    .ivu-input{
+       font-size: 20px;
+        text-align: center;
+        border: 0;
+        padding-right: 23px;
+        &:focus{
+           box-shadow: none;
+        }
+    }
+    .ivu-input-group-prepend{
+      border: 0;
       background: #fff;
+      padding-left: 8px;
+      border-right: 1px solid #e0e0e0;
+    }
+    .ivu-select-selected-value{
+      font-size: 16px;
+    }
+    .ivu-input-group-append{
+        width: 155px;
+        background: #fff;
+        border: 0;
+        border-left: 1px solid #e0e0e0;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        height: 34px;
+        .ivu-icon{
+          font-size: 16px;
+        }
+        span{
+            font-size: 16px;
+          }
+    }
+    .ivu-select{
+      width: 150px !important;
+      border: 0;
+      box-shadow: none;
+      .ivu-select-selected-value{
+        background: #fff;
+      }
     }
   }
 }
