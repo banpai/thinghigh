@@ -17,9 +17,5 @@
     "id": 2,
     "name": "代码库",
     "state": "code"
-  }, {
-    "id": 3,
-    "name": "写代码",
-    "state": "write"
   }]
 }

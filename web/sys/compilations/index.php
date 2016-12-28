@@ -102,6 +102,7 @@
             <Dropdown-menu slot="list">
                 <Dropdown-item v-on:click="code_chang">修改</Dropdown-item>
                 <Dropdown-item v-on:click="code_delete">删除</Dropdown-item>
+                <Dropdown-item v-on:click="code_add">增加</Dropdown-item>
             </Dropdown-menu>
         </Dropdown>
         <!--删除和编辑模块 end-->

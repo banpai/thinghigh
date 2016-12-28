@@ -103,6 +103,14 @@ var app = new Vue({
       //转换模块
       this.model = 'write';
     },
+    //代码库增加代码
+    code_add: function(){
+      this.model = 'write';
+      this.code_id = null;
+      this.codecontent = '#没有代码';
+      this.codesearch = '';
+      this.code_flag = true;
+    },
     //代码库删除代码
     code_delete: function () {
       if(this.code_id){
@@ -155,6 +163,11 @@ var app = new Vue({
                 portsfun.getcodename();
                 //提示成功
                 that.$Message.success('提交成功');
+                that.model = 'code';
+                that.code_id = null;
+                that.codecontent = '#没有代码';
+                that.codesearch = '';
+                that.code_flag = true;
               }
             });
           }
