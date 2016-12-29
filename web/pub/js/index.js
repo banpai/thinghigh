@@ -256,6 +256,9 @@ var portsfun = (function () {
       app.code_title = data.data[0].title;
       var xx = JSON.stringify(data.data[0]);
       console.log(xx);
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
     });
   };
   return {
@@ -273,4 +276,5 @@ $(function () {
   portsfun.getbuttonsdata();
   portsfun.getleveldata();
   portsfun.getcodename();
+  hljs.initHighlightingOnLoad();
 });
