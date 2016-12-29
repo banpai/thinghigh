@@ -16,7 +16,7 @@ if (Request::is_ajax()) {
     Response::json(array(
       'errcode' => '0',
       'errmsg' => $id,
-      'data' => $res  
+      'data' => $res
     ));
   }else if($action == 'level'){
     $sql = "select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10";
