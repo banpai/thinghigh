@@ -52,6 +52,7 @@ body {
 /*左边的部分 start*/
 #left{
   float: left;
+  display: none;
 }
 @keyframes addheight {
     0% {
@@ -75,6 +76,7 @@ body {
 /*右边的部分 start*/
 #right{
   float: right;
+  display: none;
 }
 #right .li .word{
   width: 60px;
@@ -100,6 +102,7 @@ body {
     background: #fff;
     border-radius: .5rem;
     height: 90%;
+    display: none;
 }
 /*任务 start*/
 #app #task{
@@ -488,4 +491,16 @@ code {
 #code .wysiwyg pre code {
     background: #282c34;
     color: #abb2bf;
+}
+
+.an_footer{
+  background-image: url("/media/images/footer02.png");
+  width: 900px;
+  height: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 50%;
+  margin-right: -450px;
+  bottom: 0px;
 }

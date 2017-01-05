@@ -272,9 +272,9 @@ var portsfun = (function () {
 }());
 
 //全局初始化
-$(function () {
+window.onload = function(){
   portsfun.getbuttonsdata();
   portsfun.getleveldata();
   portsfun.getcodename();
   hljs.initHighlightingOnLoad();
-});
+}

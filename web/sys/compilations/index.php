@@ -141,10 +141,15 @@
     <!--写代码 end-->
 	</div>
 	<!--中部分主体 end-->
+
+  <!--底部动画 start-->
+  <div class="an_footer"></div>
+  <!--底部动画 end-->
   <!-- 引入组件库 -->
   <script src="/js/iview.min.js"></script>
   <script src="/js/highlight/highlight.min.js"></script>
   <script src="/js/marked.min.js" charset="utf-8"></script>
+  <script src="/js/anime.min.js" charset="utf-8"></script>
 	<script src="/js/index.js" charset="utf-8"></script>
 </body>
 </html>
