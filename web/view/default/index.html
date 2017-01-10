@@ -39,9 +39,7 @@
 		<!--任务 start-->
     <div id="task" v-if="model === 'task'">
       <!--搜索 start-->
-      <div class="task_header">
-        <input v-model="tasksearch" placeholder="增加任务，按回车键添加" class="addtask">
-      </div>
+      <i-input icon="ios-clock-outline" :value.sync="tasksearch" placeholder="增加任务，按回车键添加..." class="addtask" :on-enter="task_enter" :on-click="task_enter"></i-input>
       <!--搜索 end-->
       <div class="task_box" v-for="item in taskli">
         <!--未完成 start-->
@@ -127,6 +125,7 @@
       <!--编写代码部分 end-->
     </div>
     <!--写代码 end-->
+
 	</div>
 	<!--中部分主体 end-->
 

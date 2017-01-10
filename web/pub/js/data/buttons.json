@@ -2,20 +2,20 @@
   "errcode": "0",
   "errmsg": "",
   "data": [{
-    "id": 0,
-    "name": "登录",
-    "state": "login"
+    "id": 3,
+    "name": "代码管理",
+    "state": "code"
   }, {
-    "id": 1,
-    "name": "任务",
-    "state": "task"
-  }, {
-    "id": 4,
+    "id": 2,
     "name": "项目自测",
     "state": "selftest"
   }, {
-    "id": 2,
-    "name": "代码库",
-    "state": "code"
+    "id": 1,
+    "name": "任务管理",
+    "state": "task"
+  }, {
+    "id": 4,
+    "name": "时间管理",
+    "state": "time"
   }]
 }

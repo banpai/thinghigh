@@ -48,7 +48,7 @@ var app = new Vue({
     //编写代码的部分
     write: '',
     //模块的显示隐藏
-    model: 'task',
+    model: 'code',
     //代码库名称的搜索
     codesearch: '',
     //任务模块
@@ -77,8 +77,23 @@ var app = new Vue({
     },
     getcn: function(value){
       alert(value);
+    }, 
+    //任务模块，添加新的任务
+    task_enter: function(){
+      alert('x');
+      if(that.tasksearch.length > 0){
+         var that = this;
+       console.log(that.tasksearch);
+        var sel = {
+          name: that.tasksearch
+        };
+        that.taskli[0].lidata.push(sel);
+        that.tasksearch = '';
+      }else{
+        that.$Message.success('请填写内容');
+      }
     },
-    //获取代码的代码
+    //代码模块，获取代码的代码
     format: function (labels, selectedData) {
       var index = labels.length - 1;
       var data = selectedData[index] || false;
@@ -93,7 +108,7 @@ var app = new Vue({
       }
       // return labels[index];
     },
-    //代码库修改代码
+    //代码模块，代码库修改代码
     code_chang: function () {
       //赋值给写代码模块
       this.write = this.codecontent;
@@ -103,7 +118,7 @@ var app = new Vue({
       //转换模块
       this.model = 'write';
     },
-    //代码库增加代码
+    //代码模块，代码库增加代码
     code_add: function(){
       this.model = 'write';
       this.code_id = null;
@@ -111,7 +126,7 @@ var app = new Vue({
       this.codesearch = '';
       this.code_flag = true;
     },
-    //代码库删除代码
+    //代码模块，代码库删除代码
     code_delete: function () {
       if(this.code_id){
         var that = this;  
@@ -135,7 +150,7 @@ var app = new Vue({
         this.$Message.error('请选择代码片段');
       }
     },
-    //编写代码库的提交
+    //代码模块，编写代码库的提交
     write_sub: function () {
       if (!this.write_name) {
         this.$Message.error('请填写名称');
@@ -177,19 +192,19 @@ var app = new Vue({
   }
 });
 
-document.onkeydown = function (event) {
-  var e = event || window.event || arguments.callee.caller.arguments[0];
-  if (e && e.keyCode == 13) { // enter 键
-    if (app.model === 'task') {
-      console.log(app.tasksearch);
-      var sel = {
-        name: app.tasksearch
-      };
-      app.taskli[0].lidata.push(sel);
-      app.tasksearch = '';
-    }
-  }
-};
+// document.onkeydown = function (event) {
+//   var e = event || window.event || arguments.callee.caller.arguments[0];
+//   if (e && e.keyCode == 13) { // enter 键
+//     if (app.model === 'task') {
+//       console.log(app.tasksearch);
+//       var sel = {
+//         name: app.tasksearch
+//       };
+//       app.taskli[0].lidata.push(sel);
+//       app.tasksearch = '';
+//     }
+//   }
+// };
 
 //统一管理接口
 var portsfun = (function () {
@@ -273,6 +288,9 @@ var portsfun = (function () {
 
 //全局初始化
 window.onload = function(){
+  $('#left').show();
+  $('#right').show();
+  $('#app').show();
   portsfun.getbuttonsdata();
   portsfun.getleveldata();
   portsfun.getcodename();
