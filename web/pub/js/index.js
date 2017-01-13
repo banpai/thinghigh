@@ -18,6 +18,9 @@ var right = new Vue({
   methods: {
     cgmk: function (s) {
       app.model = s;
+      if(s === 'task'){
+        portsfun.gettask();
+      }
       app.code_id = null;
       app.codecontent = '#没有代码';
       app.codesearch = '';
@@ -40,6 +43,8 @@ var app = new Vue({
     code_flag: true,
     //任务模块的添加
     tasksearch: '',
+    //任务模块修改的任务id
+    task_id: null,
     visible: false,
     jilian: false,
     //编写的代码选择
@@ -52,10 +57,8 @@ var app = new Vue({
     //代码库名称的搜索
     codesearch: '',
     //任务模块
-    taskli: [{
-      date: '2016-12-14',
-      lidata: []
-    }],
+    taskli: [],
+    taskliok: [],
     //代码库名称列表
     codename: []
   },
@@ -77,21 +80,29 @@ var app = new Vue({
     },
     getcn: function(value){
       alert(value);
-    }, 
-    //任务模块，添加新的任务
+    },
+    //任务模块enter键盘触发事件，添加新的任务
     task_enter: function(){
-      alert('x');
+      var that = this;
       if(that.tasksearch.length > 0){
-         var that = this;
-       console.log(that.tasksearch);
-        var sel = {
-          name: that.tasksearch
-        };
-        that.taskli[0].lidata.push(sel);
-        that.tasksearch = '';
+        //调用增加任务的接口
+        portsfun.puttask(that.tasksearch, function(){
+          portsfun.gettask();
+        });
       }else{
-        that.$Message.success('请填写内容');
+        that.$Message.warning('请填写内容');
       }
+    },
+    //任务模块，完成任务的方法
+    task_ok: function(id){
+      portsfun.oktask(id, '1', function(data){
+        portsfun.gettask();
+      });
+    },
+    //任务模块，修改任务的方法
+    task_change: function(id, name){
+      this.tasksearch = name;
+      this.task_id = id;
     },
     //代码模块，获取代码的代码
     format: function (labels, selectedData) {
@@ -192,20 +203,6 @@ var app = new Vue({
   }
 });
 
-// document.onkeydown = function (event) {
-//   var e = event || window.event || arguments.callee.caller.arguments[0];
-//   if (e && e.keyCode == 13) { // enter 键
-//     if (app.model === 'task') {
-//       console.log(app.tasksearch);
-//       var sel = {
-//         name: app.tasksearch
-//       };
-//       app.taskli[0].lidata.push(sel);
-//       app.tasksearch = '';
-//     }
-//   }
-// };
-
 //统一管理接口
 var portsfun = (function () {
   //提交代码到代码库
@@ -216,8 +213,6 @@ var portsfun = (function () {
       content: m.write,
       title: m.write_name
     }, function (data) {
-      var xx = JSON.stringify(data);
-      console.log(xx);
       if (data.errcode === '0') {
         m.callback();
       } else {
@@ -230,8 +225,6 @@ var portsfun = (function () {
     ajax('index-delcode.html', {
       id: m.id
     }, function (data) {
-      var xx = JSON.stringify(data);
-      console.log(xx);
       m.callback();
     });
   };
@@ -241,8 +234,6 @@ var portsfun = (function () {
 
     }, function (data) {
       app.codename = data.data;
-      var xx = JSON.stringify(data);
-      console.log(xx);
     });
   };
   //获取按钮模块数据
@@ -255,8 +246,6 @@ var portsfun = (function () {
   var getleveldata = function () {
     ajax('index-level.html', {}, function (data) {
       left.level = data.data;
-      var xx = JSON.stringify(data);
-      console.log(xx);
     });
   };
   //获取代码库的代码
@@ -269,12 +258,48 @@ var portsfun = (function () {
       app.code_type = data.data[0].type;
       app.code_id = data.data[0].id;
       app.code_title = data.data[0].title;
-      var xx = JSON.stringify(data.data[0]);
-      console.log(xx);
       $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
       });
     });
+  };
+  //提交任务到任务列表
+  var puttask = function(name, callback){
+    ajax('index-puttask.html', {
+      name: name,
+      id: app.task_id
+    }, function(data){
+      app.task_id = null;
+      callback();
+    });
+  };
+  //获取任务列表的数据
+  var gettask = function(){
+     ajax('index-gettask.html', {}, function(data){
+       app.taskli = [];
+       app.taskliok = [];
+       $.each(data.date, function(i, v){  
+         if(v.state === '0'){
+           app.taskli.push(v);
+         }else{
+           app.taskliok.push(v);
+         }
+       });
+        app.tasksearch = '';
+      });
+  };
+  //完成任务到任务列表
+  var oktask = function(id, state, callback){
+    ajax('index-oktask.html', {
+      id: id,
+      state: state
+    }, function(data){
+      callback(data);
+    });
+  };
+  //删除任务列表里的任务
+  var deltask = function(){
+     
   };
   return {
     getbuttonsdata: getbuttonsdata,
@@ -282,7 +307,10 @@ var portsfun = (function () {
     getcode: getcode,
     getcodename: getcodename,
     putcode: putcode,
-    delcode: delcode
+    delcode: delcode,
+    puttask: puttask,
+    gettask: gettask,
+    oktask: oktask
   };
 }());
 

@@ -6,16 +6,20 @@
     "name": "代码管理",
     "state": "code"
   }, {
-    "id": 2,
-    "name": "项目自测",
-    "state": "selftest"
-  }, {
     "id": 1,
     "name": "任务管理",
     "state": "task"
   }, {
+    "id": 2,
+    "name": "项目自测",
+    "state": "selftest"
+  }, {
     "id": 4,
     "name": "时间管理",
     "state": "time"
+  },{
+    "id": 5,
+    "name": "微小习惯",
+    "state": "wxxg"
   }]
 }

@@ -1,0 +1,1 @@
+12:52:26: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'descnull' at line 1：select * from task order by updatetime descnull

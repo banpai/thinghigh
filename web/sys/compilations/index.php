@@ -51,22 +51,54 @@
 		<!--任务 start-->
     <div id="task" v-if="model === 'task'">
       <!--搜索 start-->
-      <i-input icon="ios-clock-outline" :value.sync="tasksearch" placeholder="增加任务，按回车键添加..." class="addtask" :on-enter="task_enter" :on-click="task_enter"></i-input>
+      <i-input :value.sync="tasksearch" placeholder="增加任务，按回车键添加..." class="addtask" @on-enter="task_enter"></i-input>
+      <!--分类显示 start-->
+      <div class="flxs">
+        <div class="fen1">未完成</div>
+        <div class="fen2">已完成</div>
+      </div>
+      <!--分类显示 end-->
       <!--搜索 end-->
-      <div class="task_box" v-for="item in taskli">
+      <div class="task_box">
         <!--未完成 start-->
         <div class="task_ready">
-          <div class="task_ready_li" v-for="index in item.lidata">
-            <div class="task_ready_li_complete">OK</div>
-            <div class="task_ready_li_year">2016-12-17</div>
-            <!--<input class="task_ready_li_name" v-model="index.name">-->
+          <div class="task_ready_li" v-for="index in taskli">
+            <!--下拉菜单 start-->
+            <Dropdown trigger="click" placement="bottom-start">
+              <a href="javascript:void(0)">
+                  <Icon type="navicon-round"></Icon>
+              </a>
+              <Dropdown-menu slot="list">
+                  <Dropdown-item v-on:click="task_ok(index.id)">完成</Dropdown-item>
+                  <Dropdown-item v-on:click="task_change(index.id, index.name)">修改</Dropdown-item>
+                  <Dropdown-item v-on:click="task_remove(index.id)">删除</Dropdown-item>
+              </Dropdown-menu>
+            </Dropdown>
+            <!--下拉菜单 end-->
+            <div class="task_ready_li_year" v-text="index.createtime"></div>
             <div class="task_ready_li_name" v-text="index.name"></div>
           </div>
         </div>
         <!--未完成 end-->
         <!--已结束 start-->
         <div class="task_end">
-          <div class="task_end_li" v-for="index in item.lidata" v-text="index.name"></div>
+          <!--<div class="task_end_li" v-for="index in taskliok" v-text="index.name"></div>-->
+          <div class="task_ready_li" v-for="index in taskliok">
+            <!--下拉菜单 start-->
+            <Dropdown trigger="click" placement="bottom-start">
+              <a href="javascript:void(0)">
+                  <Icon type="navicon-round"></Icon>
+              </a>
+              <Dropdown-menu slot="list">
+                  <Dropdown-item v-on:click="task_ok(index.id)">完成</Dropdown-item>
+                  <Dropdown-item v-on:click="task_change(index.id, index.name)">修改</Dropdown-item>
+                  <Dropdown-item v-on:click="task_remove(index.id)">删除</Dropdown-item>
+              </Dropdown-menu>
+            </Dropdown>
+            <!--下拉菜单 end-->
+            <div class="task_ready_li_year" v-text="index.createtime"></div>
+            <div class="task_ready_li_name" v-text="index.name"></div>
+          </div>
         </div>
         <!--已结束 end-->
       </div>
