@@ -69,7 +69,7 @@
                   <Icon type="navicon-round"></Icon>
               </a>
               <Dropdown-menu slot="list">
-                  <Dropdown-item v-on:click="task_ok(index.id)">完成</Dropdown-item>
+                  <Dropdown-item v-on:click="task_ok(index.id, '1')">完成</Dropdown-item>
                   <Dropdown-item v-on:click="task_change(index.id, index.name)">修改</Dropdown-item>
                   <Dropdown-item v-on:click="task_remove(index.id)">删除</Dropdown-item>
               </Dropdown-menu>
@@ -90,7 +90,7 @@
                   <Icon type="navicon-round"></Icon>
               </a>
               <Dropdown-menu slot="list">
-                  <Dropdown-item v-on:click="task_ok(index.id)">完成</Dropdown-item>
+                  <Dropdown-item v-on:click="task_ok(index.id, '0')">还原</Dropdown-item>
                   <Dropdown-item v-on:click="task_change(index.id, index.name)">修改</Dropdown-item>
                   <Dropdown-item v-on:click="task_remove(index.id)">删除</Dropdown-item>
               </Dropdown-menu>

@@ -53,7 +53,7 @@ var app = new Vue({
     //编写代码的部分
     write: '',
     //模块的显示隐藏
-    model: 'code',
+    model: 'task',
     //代码库名称的搜索
     codesearch: '',
     //任务模块
@@ -94,8 +94,8 @@ var app = new Vue({
       }
     },
     //任务模块，完成任务的方法
-    task_ok: function(id){
-      portsfun.oktask(id, '1', function(data){
+    task_ok: function(id, state){
+      portsfun.oktask(id, state, function(data){
         portsfun.gettask();
       });
     },
@@ -103,6 +103,12 @@ var app = new Vue({
     task_change: function(id, name){
       this.tasksearch = name;
       this.task_id = id;
+    },
+    //任务模块,删除任务的方法
+    task_remove: function(id){
+      portsfun.deltask(id, function(data){
+        portsfun.gettask();
+      });
     },
     //代码模块，获取代码的代码
     format: function (labels, selectedData) {
@@ -298,8 +304,12 @@ var portsfun = (function () {
     });
   };
   //删除任务列表里的任务
-  var deltask = function(){
-     
+  var deltask = function(id, callback){
+    ajax('index-deltask.html', {
+      id: id
+    }, function(data){
+      callback(data);
+    });
   };
   return {
     getbuttonsdata: getbuttonsdata,
@@ -310,7 +320,8 @@ var portsfun = (function () {
     delcode: delcode,
     puttask: puttask,
     gettask: gettask,
-    oktask: oktask
+    oktask: oktask,
+    deltask: deltask
   };
 }());
 
@@ -319,6 +330,7 @@ window.onload = function(){
   $('#left').show();
   $('#right').show();
   $('#app').show();
+  portsfun.gettask();
   portsfun.getbuttonsdata();
   portsfun.getleveldata();
   portsfun.getcodename();

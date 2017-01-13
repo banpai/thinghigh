@@ -217,5 +217,21 @@ if (Request::is_ajax()) {
           'errmsg' => '保存失败'
        )); 
      }
+  }else if($action === 'deltask'){
+    //删除任务
+    $id = Request::post('id');
+    $task = new Model('task');
+    $task -> find(array('id' => $id));
+    if($task -> remove()){
+       Response::json(array(
+          'errcode' => '0',
+          'errmsg' => ''
+       ));
+     }else{
+       Response::json(array(
+          'errcode' => '1',
+          'errmsg' => '删除失败'
+       )); 
+     }
   }
 }

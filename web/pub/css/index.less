@@ -114,6 +114,9 @@ body {
     width: 100%;
     height: 40px;
     border-bottom: 1px solid #ccc;
+    position: absolute;
+    background: #fff;
+    z-index: 10;
     .fen1{
       width: 50%;
       float: left;
@@ -121,6 +124,8 @@ body {
       line-height: 40px;
       font-size: 16px;
       border-right: 1px solid #ccc;
+      background: #fff;
+      border-bottom: 1px solid #ccc;
     }
     .fen2{
       width: 50%;
@@ -128,6 +133,8 @@ body {
       text-align: center;
       line-height: 40px;
       font-size: 16px;
+      background: #fff;
+      border-bottom: 1px solid #ccc;
     }
   }
 }
@@ -145,6 +152,8 @@ body {
   border-top-right-radius: .5rem;
   border-top-left-radius: .5rem;
   border-bottom: 1px solid #d9d9d9;
+  background: #fff;
+  z-index: 10;
   input{
     text-align: center;
     outline: 0;
@@ -159,23 +168,27 @@ body {
   overflow: auto;
 }
 #app #task .task_box .task_ready{
-  width: 50%;
-  position: absolute;
-  left: 0;
-  height: 100%;
-  overflow-y: auto;
-  border-right: 1px solid #d9d9d9;
+    width: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 73px;
+    height: 100%;
+    overflow-y: auto;
+    border-right: 1px solid #d9d9d9;
+
 }
 #app #task .task_box .task_ready_li:first-child{
   // margin-top: 35px;
 }
 #app #task .task_box .task_ready_li{
-  border-bottom: 1px solid #d9d9d9;
   height: 45px;
   line-height: 45px;
   clear: both;
   // overflow: hidden;
   position: relative;
+  border-bottom-width: 0px;
+  border-bottom: 1px solid #d9d9d9;
   .ivu-dropdown{
     position: absolute;
     left: 15px;
@@ -197,7 +210,6 @@ body {
     width: 75px;
     overflow: hidden;
     height: 45px;
-    z-index: 100;
     color: #ababab;
   }
   //任务名称box
@@ -234,12 +246,14 @@ body {
   }
 }
 #app #task .task_box .task_end{
-  width: 50%;
-  position: absolute;
-  right: 0;
-  float: right;
-  overflow-y: auto;
-  height: 100%;
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-top: 73px;
+    height: 100%;
+    overflow-y: auto;
+    border-right: 1px solid #d9d9d9;
 }
 #app #task .task_box .task_end_li:first-child{
   // margin-top: 35px;
