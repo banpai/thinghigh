@@ -191,7 +191,7 @@ if (Request::is_ajax()) {
      }
   }else if ($action === 'gettask') {
     //搜索任务数据
-    $sql = "select id,name,state,createtime,updatetime from task order by updatetime asc";
+    $sql = "select id,name,state,createtime,updatetime from task order by createtime asc";
     $res = $db->query($sql);
     Response::json(array(
       'errcode' => '0',
