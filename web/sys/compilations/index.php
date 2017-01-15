@@ -182,12 +182,6 @@
     </div>
     <!--随机任务 end-->
 
-    <!--项目自测 start-->
-    <div id="selftest" v-if="model === 'selftest'">
-      <h1>项目自测</h1>
-    </div>
-    <!--项目自测 end-->
-
     <!--微小习惯 start-->
     <div id="wxxg" v-if="model === 'wxxg'">
       <h1>微小习惯</h1>
