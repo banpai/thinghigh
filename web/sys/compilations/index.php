@@ -48,7 +48,7 @@
 	<!--中部分主体 start-->
 	<div id="app">
 
-		<!--任务 start-->
+		<!--任务管理 start-->
     <div id="task" v-if="model === 'task'">
       <!--搜索 start-->
       <i-input :value.sync="tasksearch" placeholder="增加任务，按回车键添加..." class="addtask" @on-enter="task_enter"></i-input>
@@ -103,9 +103,9 @@
         <!--已结束 end-->
       </div>
     </div>
-		<!--任务 end-->
+		<!--任务管理 end-->
 
-    <!--代码库 start-->
+    <!--代码管理 start-->
     <div id="code" v-if="model === 'code'">
        <!--搜索 start-->
       <div class="task_header">
@@ -144,7 +144,7 @@
       <!--显示代码 end-->
 
     </div>
-    <!--代码库 end-->
+    <!--代码管理 end-->
 
     <!--写代码 start-->
     <div id="write" v-if="model === 'write'">
@@ -169,6 +169,30 @@
       <!--编写代码部分 end-->
     </div>
     <!--写代码 end-->
+
+    <!--地址管理 start-->
+    <div id="address" v-if="model === 'address'">
+      <h1>地址管理</h1>
+    </div>
+    <!--地址管理 end-->
+
+    <!--随机任务 start-->
+    <div id="sjrw" v-if="model === 'sjrw'">
+      <h1>随机任务</h1>
+    </div>
+    <!--随机任务 end-->
+
+    <!--项目自测 start-->
+    <div id="selftest" v-if="model === 'selftest'">
+      <h1>项目自测</h1>
+    </div>
+    <!--项目自测 end-->
+
+    <!--微小习惯 start-->
+    <div id="wxxg" v-if="model === 'wxxg'">
+      <h1>微小习惯</h1>
+    </div>
+    <!--微小习惯 end-->
 
 	</div>
 	<!--中部分主体 end-->
