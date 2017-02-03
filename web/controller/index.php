@@ -7,7 +7,7 @@ if (Request::is_ajax()) {
   if ($action == 'code') {
     //获取代码库内容
     $flag = Request::post('flag');
-    $id = Request::post('id');
+    $id = Request::post('id'); 
     if($flag === '2'){
       $sql = "select * from code where id = ?";
       $parm = array($id);
@@ -19,7 +19,7 @@ if (Request::is_ajax()) {
       'data' => $res
     ));
   }else if($action == 'level'){
-    //获取等级
+    //获取等级 
     $sql = "select * from level order by CAST(`li` AS DECIMAL) desc limit 1, 10";
     $res = $db->query($sql);
     $set = array();
@@ -226,12 +226,28 @@ if (Request::is_ajax()) {
        Response::json(array(
           'errcode' => '0',
           'errmsg' => ''
-       ));
+       )); 
      }else{
        Response::json(array(
           'errcode' => '1',
           'errmsg' => '删除失败'
-       )); 
+       ));
      }
+  }else if($action === 'getaddress'){
+    //搜索地址信息数据
+    $sql = "select a.title,b.title_zi,c.name,c.address,c.aid,c.alid";
+    $sql = $sql . " FROM address AS a, address_li AS b, address_li_record AS c";
+    $sql = $sql . " WHERE a.user_guid = 'AE01B41A-30FA-9267-E2C4-D307F3C7EB32'";
+    $sql = $sql . " AND a.id = b.aid AND b.id = c.alid";
+    $res = $db->query($sql);
+    //搜索二级地址的数据
+    $sql2 = "select * from address_li";
+    $res2 = $db->query($sql2);
+    Response::json(array(
+          'errcode' => '0',
+          'errmsg' => '',
+          'data' => $res,
+          'data2' => $res2
+       ));
   }
 }

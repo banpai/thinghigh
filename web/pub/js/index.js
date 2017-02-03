@@ -22,7 +22,7 @@ var right = new Vue({
         portsfun.gettask();
       }
       app.code_id = null;
-      app.codecontent = '#没有代码';
+      app.codecontent = '#没有代码';   
       app.codesearch = '';
       app.code_flag = true;
     }
@@ -36,12 +36,12 @@ var app = new Vue({
     //搜索的代码显示
     codecontent: '#没有代码',
     //搜索的代码类型
-    code_type: '',
+    code_type: '', 
     //搜索的代码id
     code_id: '',
     code_title: '',
     code_flag: true,
-    //任务模块的添加
+    //任务模块的添加 
     tasksearch: '',
     //任务模块修改的任务id
     task_id: null,
@@ -60,7 +60,9 @@ var app = new Vue({
     taskli: [],
     taskliok: [],
     //代码库名称列表
-    codename: []
+    codename: [],
+    //地址管理数据
+    addressData: []
   },
   filters: {
     marked: marked
@@ -311,6 +313,51 @@ var portsfun = (function () {
       callback(data);
     });
   };
+  //获取地址数组的信息
+  var getaddress = function(){
+     ajax('index-getaddress.html', {}, function(data){
+       var sel = [{
+         'title' : '常用',
+         'data' : []
+       },{
+         'title' : '资料', 
+         'data' : []
+       }];
+       var len = data.data.length;
+       $.each(data.data2, function(i, v){
+        if(v.aid === '1'){
+          var selli = [];
+          $.each(data.data, function(j, k){
+            if(k.aid === '1' && v.id === k.alid){
+              selli.push({
+                'name': k.name,
+                'address': k.address
+              });
+            }
+          });
+          sel[0].data.push({
+            'title_zi': v.title_zi,
+             data: selli
+          });
+        }else if(v.aid === '2'){
+          var selli = [];
+          $.each(data.data, function(j, k){
+            if(k.aid === '2' && v.id === k.alid){
+              selli.push({
+                'name': k.name,
+                'address': k.address
+              });
+            }
+          });
+          sel[1].data.push({
+            'title_zi': v.title_zi,
+             data: selli
+          });
+        }
+       });
+       app.addressData = sel;
+     });
+  };
   return {
     getbuttonsdata: getbuttonsdata,
     getleveldata: getleveldata,
@@ -321,12 +368,14 @@ var portsfun = (function () {
     puttask: puttask,
     gettask: gettask,
     oktask: oktask,
-    deltask: deltask
+    deltask: deltask,
+    getaddress: getaddress
   };
 }());
 
 //全局初始化
 window.onload = function(){
+  // Vue.config.delimiters = ['[%', '%]'];
   $('#left').show();
   $('#right').show();
   $('#app').show();
@@ -335,4 +384,5 @@ window.onload = function(){
   portsfun.getleveldata();
   portsfun.getcodename();
   hljs.initHighlightingOnLoad();
+  portsfun.getaddress();
 }

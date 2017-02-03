@@ -160,13 +160,47 @@
 
     <!--地址管理 start-->
     <div id="address" v-if="model === 'address'">
-      <h1>地址管理</h1>
+        <!--地址输入 start-->
+        <!--<i-input>
+          <i-select :model.sync="select3" slot="prepend" style="width: 80px">
+            <i-option value="day">日活</i-option>
+            <i-option value="month">月活</i-option>
+          </i-select>
+          <i-button slot="append" icon="ios-search"></i-button>
+        </i-input> -->
+        <!--地址输入 end-->
+        <div style="height: 19px"></div>
+        <!--地址展示 start-->
+        <Collapse accordion>
+          <Panel v-for="el in addressData">
+              {{el.title
+              }}
+              <div slot="content">
+                  <Collapse accordion>
+                      <Panel v-for="elem in el.data">
+                         {{elem.title_zi
+                           }}
+                           <p slot="content">
+                               <a v-for="elemel in elem.data" 
+                               v-bind:href="elemel.address" 
+                               target="_blank"
+                               class="li3address">{{elemel.name
+                           }}</a>
+                           </p>
+                      </Panel>
+                  </Collapse>
+              </div>
+          </Panel>
+        </Collapse>
+      <!--地址展示 end-->
     </div>
     <!--地址管理 end-->
 
     <!--随机任务 start-->
     <div id="sjrw" v-if="model === 'sjrw'">
-      <h1>随机任务</h1>
+      <!--九宫格抽任务 start-->
+       
+      <!--九宫格抽任务 end-->
     </div>
     <!--随机任务 end-->
 
